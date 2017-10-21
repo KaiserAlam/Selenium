@@ -19,7 +19,7 @@ public class RegressionHQTest extends SeleniumHQ {
 
     @BeforeTest
     public void setup() {
-        System.setProperty("webdriver.driver.chrome", "C:\\chromedriver.exe");
+        System.setProperty("webdriver.driver.chrome", System.getProperty("user.name")+"\\chromedriver.exe");
     }
 
     @Test(invocationCount = 1)
