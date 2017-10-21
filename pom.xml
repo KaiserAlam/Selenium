@@ -13,8 +13,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <selenium.version>3.4.0</selenium.version>
-    <!-- failsafe.version>2.20</failsafe.version -->
+    <selenium.version>3.6.0</selenium.version>
+    <failsafe.version>2.20.1</failsafe.version>
     <browser>Chrome</browser>
     <test.First.properties>${project.basedir}/src/test/resources/First.properties</test.First.properties>
   </properties>
@@ -44,22 +44,19 @@
           </execution>
         </executions>
       </plugin>
-      <!--plugin>
-        <groupId>com.apache.maven.plugins</groupId>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>${failsafe.version}</version>
-        <configuration>
-          <suiteXmlFiles>
-            <suiteXmlFile>${project.basedir}/src/test/resources/testNG.xml</suiteXmlFile>
-          </suiteXmlFiles>
-          <systemProperties>
-            <browser>${browser}</browser>
-          </systemProperties>
-          <includes>
-            <include>**/*Test.java</include>
-          </includes>
-        </configuration>
-      </plugin-->
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -67,7 +64,7 @@
     <dependency>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-failsafe-plugin</artifactId>
-      <version>2.20</version>
+      <version>2.20.1</version>
       <type>maven-plugin</type>
     </dependency>
     <dependency>
