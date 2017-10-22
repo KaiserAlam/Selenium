@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Test
-public class RegressionHQTest {
+public class SeleniumHQTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(RegressionHQTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(SeleniumHQTest.class);
     private WebDriver driver = null;
     private SeleniumHQ seleniumHQ = null;
 
