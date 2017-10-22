@@ -28,10 +28,20 @@ public class ProjectsPageTest {
 
     @Test
     @Parameters({"browser"})
-    public void verifyProjectsListOnProjectPage(){
+    public void verifyProjectPage(){
         projectPage = new ProjectsPage(driver);
         logger.info("Verify page title");
         Assert.assertEquals(projectPage.getPageTitle(), "Selenium Projects");
+    }
+
+    @Test
+    @Parameters({"browser"})
+    public void verifyProjectsListonProjectPage(){
+        projectPage = new ProjectsPage(driver);
+        logger.info("Verify List of projects on Project Page");
+        for(String string: projectPage.getLinks()){
+            System.out.println(string);
+        }
     }
 
     @AfterMethod
