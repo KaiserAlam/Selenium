@@ -1,4 +1,4 @@
-package com.avalanche;
+package com.page;
 
 import java.util.ResourceBundle;
 

@@ -1,5 +1,6 @@
-package com.avalanche;
+package com.page;
 
+import com.util.BrowserActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

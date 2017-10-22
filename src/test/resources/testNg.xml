@@ -6,6 +6,7 @@
         <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="com.avalanche.SeleniumHQTest"></class>
+            <class name="com.avalanche.ProjectsPageTest"></class>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
