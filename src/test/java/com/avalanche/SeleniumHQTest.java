@@ -48,6 +48,13 @@ public class SeleniumHQTest {
         Assert.assertEquals(actualHeaderItems, expectedItem);
     }
 
+    @Test
+    @Parameters({"browser"})
+    public void verifyProjectPage(){
+        seleniumHQ = new SeleniumHQ(driver);
+        Assert.assertEquals(seleniumHQ.getPage(driver), "Selenium Projects");
+    }
+
     @AfterMethod
     public void tearDown() {
         driver.quit();

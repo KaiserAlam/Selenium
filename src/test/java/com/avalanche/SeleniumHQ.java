@@ -48,4 +48,11 @@ public class SeleniumHQ extends Page{
         }
         return actualItem;
     }
+
+    public String getPage(WebDriver driver){
+        driver.get(getURL());
+        actions = new BrowserActions();
+        actions.clickOnElement(projectLinks);
+        return driver.getTitle();
+    }
 }
