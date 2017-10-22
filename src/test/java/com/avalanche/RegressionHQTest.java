@@ -1,8 +1,5 @@
 package com.avalanche;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
@@ -13,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Test
-public class RegressionHQTest extends SeleniumHQ {
+public class RegressionHQTest {
 
     private static final Logger logger = LoggerFactory.getLogger(RegressionHQTest.class);
-    WebDriver driver;
+    private WebDriver driver = null;
+    private SeleniumHQ seleniumHQ = null;
 
     @BeforeMethod
     public void setup() {
@@ -24,43 +22,30 @@ public class RegressionHQTest extends SeleniumHQ {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("window-size=800, 480");
         driver = new ChromeDriver(options);
-
     }
 
     @Test
     @Parameters({"browser"})
-    public void navigateTo() {
-        driver.get(getURL());
-        logger.info("Page Loading ...");
-        Assert.assertEquals(driver.getTitle(), "Selenium - Web Browser Automation");
+    public void verifySeleniumHQPageTitle(){
+        seleniumHQ = new SeleniumHQ(driver);
+        logger.info("Verify SeleniumHQ page title");
+        Assert.assertEquals(seleniumHQ.getPageTitle(driver), "Selenium - Web Browser Automation");
     }
 
     @Test
     @Parameters({"browser"})
-    public void verifyHeaderNavigationItems(){
+    public void verifyHeaderItemsOnSeleniumHQPage(){
         List<String> expectedItem = new ArrayList<>();
-        List<String> actualItem = new ArrayList<>();
         expectedItem.add("About");
         expectedItem.add("Support");
         expectedItem.add("Documentation");
         expectedItem.add("Download");
         expectedItem.add("Projects");
 
-        driver.get(getURL());
-        List<WebElement> elements = driver.findElements(By.cssSelector("#header > ul > li"));
-        Assert.assertEquals(elements.size(), 5);
-
-        for (WebElement element : elements) {
-            actualItem.add(element.getText());
-        }
-        Assert.assertEquals(actualItem, expectedItem);
-    }
-
-    @Test
-    @Parameters({"browser"})
-    public void verifySeleniumProjects() {
-        driver.get(getURL());
-        driver.findElement(By.xpath("//*[@id=\"menu_projects\"]/a")).click();
+        seleniumHQ = new SeleniumHQ(driver);
+        List<String> actualHeaderItems = seleniumHQ.getHeaderItemList(driver);
+        logger.info("Verify item contains in Header");
+        Assert.assertEquals(actualHeaderItems, expectedItem);
     }
 
     @AfterMethod
