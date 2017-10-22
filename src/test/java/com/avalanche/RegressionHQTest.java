@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -15,14 +16,18 @@ import java.util.List;
 public class RegressionHQTest extends SeleniumHQ {
 
     private static final Logger logger = LoggerFactory.getLogger(RegressionHQTest.class);
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver;
 
-    @BeforeTest
+    @BeforeMethod
     public void setup() {
         System.setProperty("webdriver.driver.chrome", System.getProperty("user.name")+"\\chromedriver.exe");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("window-size=800, 480");
+        driver = new ChromeDriver(options);
+
     }
 
-    @Test(invocationCount = 1)
+    @Test
     @Parameters({"browser"})
     public void navigateTo() {
         driver.get(getURL());
@@ -30,7 +35,7 @@ public class RegressionHQTest extends SeleniumHQ {
         Assert.assertEquals(driver.getTitle(), "Selenium - Web Browser Automation");
     }
 
-    @Test(invocationCount = 1)
+    @Test
     @Parameters({"browser"})
     public void verifyHeaderNavigationItems(){
         List<String> expectedItem = new ArrayList<>();
@@ -51,7 +56,14 @@ public class RegressionHQTest extends SeleniumHQ {
         Assert.assertEquals(actualItem, expectedItem);
     }
 
-    @AfterTest
+    @Test
+    @Parameters({"browser"})
+    public void verifySeleniumProjects() {
+        driver.get(getURL());
+        driver.findElement(By.xpath("//*[@id=\"menu_projects\"]/a")).click();
+    }
+
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
